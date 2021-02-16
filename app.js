@@ -26,11 +26,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/logOut", logOutRouter);
-app.use("/profil", editProfilRouter);
+app.use("/profile", editProfilRouter);
 app.use("/movies", moviesRouter);
 app.use("/favorite", favoriteRouter);
-app.use("/login", subscribeRouter);
-app.use("/subscribe", loginRouter);
+app.use("/login", loginRouter);
+app.use("/subscribe", subscribeRouter);
 app.use("/", indexRouter);
 
 module.exports = app;
