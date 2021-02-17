@@ -1,11 +1,18 @@
 // Faire une fonction pour recupérer un film //
+const Movies = require("../models/movieCollection");
 
-const Movies = require("..movieCollection");
+const movies = {
+  getMovie: async (req, res) => {
+    const movieId = req.query.id;
+    console.log(movieId);
+    const movie = await Movies.findOne({ _id: movieId }).exec();
 
-const getMovie = {
-  findMovie: (req, res) => {
-    macollection.findOne;
+    if (movie instanceof Error) {
+      res.status(500).json({ message: "ça fonctionne pas " });
+      return;
+    }
+
+    res.json(movie);
   },
 };
-
-module.exports = movieShema;
+module.exports = movies;

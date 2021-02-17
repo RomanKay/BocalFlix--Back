@@ -2,20 +2,25 @@
 
 const mongoose = require("mongoose");
 
-const movieShema = mongoose.Schema({
-  title: String,
+const movieShema = mongoose.Schema(
+  {
+    title: String,
 
-  description: String,
+    description: String,
 
-  link: String,
+    link: String,
 
-  image: String,
+    image: String,
 
-  category: {
-    type: String,
-    enum: ["Horreur", "Marvel", "Serie", "Action"],
+    category: {
+      type: String,
+      enum: ["Horreur", "Marvel", "Serie", "Action"],
+    },
   },
-});
+  {
+    collection: "movies",
+  }
+);
 
 const movie = mongoose.model("movie", movieShema);
 module.exports = movie;
