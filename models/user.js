@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 
 // Schéma //
 
+const favoriteShema = new mongoose.Schema({
+  title: String,
+  link: String,
+  image: String,
+});
+
 const userSchema = new mongoose.Schema({
   lastName: String,
   firstName: String,
@@ -14,6 +20,7 @@ const userSchema = new mongoose.Schema({
   },
   cardNumber: Number,
   cvv: Number,
+  favorites: [favoriteShema],
 });
 
 // Création du modèle //
