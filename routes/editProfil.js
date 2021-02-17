@@ -1,8 +1,7 @@
 var express = require("express");
 var router = express.Router();
+const editProfil = require("../controllers/editProfil");
 
-router.put("/", function (req, res, next) {
-  res.send("Route à écrire");
-});
+router.put("/", editProfil.updateUserData);
 
 module.exports = router;
