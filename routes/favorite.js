@@ -1,9 +1,8 @@
 var express = require("express");
 var router = express.Router();
+const addFavorite = require("../controllers/favorite");
 
-router.post("/", function (req, res, next) {
-  res.send("envoyer");
-});
+router.post("/", addFavorite.creatFavorite);
 
 router.get("/", function (req, res, next) {
   res.send("Route à écrire");
