@@ -1,8 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const login = require("../controllers/login");
 
-router.post("/", function (req, res, next) {
-  res.send("Route à écrire");
-});
-
+router.post("/", login.toLogIn);
 module.exports = router;

@@ -13,8 +13,7 @@ const movieShema = mongoose.Schema(
     image: String,
 
     category: {
-      type: String,
-      enum: ["Horreur", "Marvel", "Serie", "Action"],
+      type: Array,
     },
   },
   {
