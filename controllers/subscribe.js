@@ -35,6 +35,7 @@ const subscribe = {
     //Sauvegarde User//
     newUser.save((error) => {
       if (error) {
+        console.log(error);
         res.status(400).json({ Message: "Une erreur s'est produite" });
       } else {
         res

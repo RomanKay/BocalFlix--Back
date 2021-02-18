@@ -1,6 +1,6 @@
 const User = require("../models/user");
 
-// Trouver l'utilisateur //
+// ---------- find User----------------------- //
 const editProfil = {
   getUserData: async (req, res) => {
     const userData = req.query.id;
@@ -15,7 +15,7 @@ const editProfil = {
     res.json(user);
   },
 
-  // Save user data //
+  //-------- Save user data-------------------- //
   saveUserData: (req, res) => {
     console.log("Nom : " + req.body.lastName);
     console.log("Prénom : " + req.body.firstName);

@@ -17,9 +17,9 @@ const userSchema = new mongoose.Schema(
     subscription: String,
     cardType: {
       type: String,
-      enum: ["visa", "mastercard"],
+      enum: ["Visa", "Mastercard"],
     },
-    cardNumber: Number,
+    cardNumber: String,
     cvv: Number,
     favorites: [favoriteShema],
   },
