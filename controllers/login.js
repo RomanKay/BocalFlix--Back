@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+var jwt = require("jsonwebtoken");
 
 const login = {
   toLogIn: async (req, res) => {
@@ -19,7 +20,11 @@ const login = {
     }
 
     if (bcrypt.compareSync(req.body.pass, user.pass)) {
-      res.json({ success: true });
+      //Token Id//
+      const token = jwt.sign({ userId: user._id }, "test", {
+        expiresIn: "24h",
+      });
+      res.json({ success: true, token });
     } else {
       res.status(401).json({ success: false });
     }
