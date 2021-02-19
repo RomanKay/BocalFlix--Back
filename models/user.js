@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
   {
     lastName: String,
     firstName: String,
-    mail: String,
+    mail: { type: String, unique: true },
     pass: String,
     subscription: String,
     cardType: {
