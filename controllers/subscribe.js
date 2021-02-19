@@ -1,13 +1,19 @@
+// Import//
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 const subscribe = {
   creatSubscribe: (req, res) => {
     console.log("Nom : " + req.body.lastName);
     console.log("Prénom : " + req.body.firstName);
     console.log("Mail : " + req.body.mail);
-    console.log("Mot de passe : " + req.body.subscription);
+    console.log("Mot de passe : " + req.body.pass);
+    console.log("Forfait : " + req.body.subscription);
     console.log("Numéro de carte : " + req.body.cardNumber);
     console.log("CVV : " + req.body.cvv);
+
+    //Encryptage du mot de passe//
+    let encryptedPass = bcrypt.hashSync(req.body.pass, 10);
 
     const {
       lastName,
@@ -25,6 +31,7 @@ const subscribe = {
       lastName,
       firstName,
       mail,
+      pass: encryptedPass,
       subscription,
       cardNumber,
       cvv,

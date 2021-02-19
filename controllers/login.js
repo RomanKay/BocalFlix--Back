@@ -1,22 +1,24 @@
-const User = require("../models/user");
-
 const login = {
   toLogIn: async (res, req) => {
-    const { userId } = req.body;
+    console.log("Mail : " + req.body.mail);
+    console.log("Mot de passe : " + req.body.pass);
 
-    /******* Recherche l'utilisateur *******/
-    const infoUser = await User.findOne({ _id: userId }).exec();
-    console.log(infoUser);
+    // Trouver l'utilisateur
+    const user = await User.findOne({ _id: req.body.mail }).exec();
 
-    // User -> Error
-    if (infoUser instanceof Error) {
-      res.status(500).json({ message: "Error" });
+    if (user instanceof Error) {
+      res.status(500).json({ message: "erreur " });
       return;
     }
-    // User -> object vide
-    if (!infoUser) {
-      res.status(500).json({ message: "Error" });
+    if (!user) {
+      res.status(500).json({ message: "User inconnu" });
       return;
+    }
+
+    if (bcrypt.compareSync(req.body.pass, user.pass)) {
+      res.json({ success: true });
+    } else {
+      res.status(401).json({ success: false });
     }
   },
 };
