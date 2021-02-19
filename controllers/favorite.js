@@ -7,10 +7,9 @@ const favorites = {
   addFavorite: async (req, res) => {
     /* Récupérer le header */
     let header = req.get("Authorization");
-    console.log(header);
+
     /* Récupérer le token */
     let token = header.split(" ")[1];
-    console.log(token);
 
     let tokenData = jwt.decode(token, "test");
     console.log(tokenData);
@@ -119,10 +118,18 @@ const favorites = {
     res.json({ succes: true });
   },
   getFavorite: async (req, res) => {
-    const userId = req.query.id;
-    console.log(userId);
+    /* Récupérer le header */
+    let header = req.get("Authorization");
 
-    const infoUser = await User.findOne({ _id: userId }).exec();
+    /* Récupérer le token */
+    let token = header.split(" ")[1];
+
+    let tokenData = jwt.decode(token, "test");
+    console.log(tokenData);
+    /* Récupérer l'id */
+    const { movieId } = req.body;
+
+    const infoUser = await User.findOne({ _id: movieId }).exec();
     console.log(infoUser);
 
     // User -> Error
