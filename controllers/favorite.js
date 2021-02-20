@@ -117,7 +117,7 @@ const favorites = {
     res.json({ succes: true });
   },
   getFavorite: async (req, res) => {
-    let b = 3;
+    let b = 4;
     console.log(b);
     /* Récupérer le header */
     let header = req.get("Authorization");
@@ -129,9 +129,8 @@ const favorites = {
     let tokenData = jwt.decode(token, "test");
     console.log(tokenData);
     /* Récupérer l'id */
-    const { movieId } = req.body;
 
-    const infoUser = await User.findOne({ _id: movieId }).exec();
+    const infoUser = await User.find({ _id: tokenData.userId }).exec();
     console.log(infoUser);
 
     // User -> Error
@@ -144,9 +143,8 @@ const favorites = {
       res.status(500).json({ message: "Error" });
       return;
     }
-    console.log(infoUser.favorites);
 
-    res.json(infoUser.favorites);
+    res.json(infoUser);
   },
 };
 
