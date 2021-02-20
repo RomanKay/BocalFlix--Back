@@ -7,18 +7,19 @@ const favorites = {
   addFavorite: async (req, res) => {
     /* Récupérer le header */
     let header = req.get("Authorization");
-
+    console.log(header);
     /* Récupérer le token */
     let token = header.split(" ")[1];
+    console.log(token);
 
     let tokenData = jwt.decode(token, "test");
-
+    console.log(tokenData);
     /* Récupérer l'id */
     const { movieId } = req.body;
 
     /******** Recherhce les infos du film *******/
     const infoMovie = await movie.findOne({ _id: movieId }).exec();
-
+    console.log(infoMovie);
     // Movie -> Error
     if (infoMovie instanceof Error) {
       res.status(500).json({ message: "Error" });
@@ -32,6 +33,7 @@ const favorites = {
 
     /******* Recherche l'utilisateur *******/
     const infoUser = await User.findOne({ _id: tokenData.userId }).exec();
+    console.log(infoUser);
 
     // User -> Error
     if (infoUser instanceof Error) {
@@ -45,7 +47,7 @@ const favorites = {
     }
 
     /******** Ajout du favori *******/
-    if (!Array.isArray(infoUser.favorites)) {
+    if (Array.isArray(infoUser.favorites)) {
       infoUser.favorites = [];
     }
 
@@ -117,21 +119,10 @@ const favorites = {
     res.json({ succes: true });
   },
   getFavorite: async (req, res) => {
-    let b = 3;
-    console.log(b);
-    /* Récupérer le header */
-    let header = req.get("Authorization");
-    console.log(header);
-    /* Récupérer le token */
-    let token = header.split(" ")[1];
-    console.log(token);
+    const userId = req.query.id;
+    console.log(userId);
 
-    let tokenData = jwt.decode(token, "test");
-    console.log(tokenData);
-    /* Récupérer l'id */
-    const { movieId } = req.body;
-
-    const infoUser = await User.findOne({ _id: movieId }).exec();
+    const infoUser = await User.findOne({ _id: userId }).exec();
     console.log(infoUser);
 
     // User -> Error
